@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>One messy form</title>
+</head>
+
+<body>
+
+<form oninput="x.value=parseInt(a.value)*parseInt(num.value)">
+  <fieldset>
+    0 <input type="range" id="a" 
+             value="this.value=parseInt(this.value)"
+             onchange="run(this.value);"> 100
+    <p>
+      Size of first number: <meter id="mtr" value="0.5"></meter>
+    </p>
+    <p>
+      <span id="val"></span> x <input type="number" id="num" value="50"> = <output id="x" for="a"></output>
+    </p>
+  </fieldset>
+  
+  <fieldset>
+    <div>
+      <label for="mail">Please enter an email address:</label>
+      <input type="email" id="mail" placeholder="name@domain.tld" required>
+    </div>
+    <div>
+      <label for="mail">Please enter a website:</label>
+      <input type="url" id="website" placeholder="http://domain.com">
+    </div>
+    <div>
+      <button>Submit</button>
+    </div>
+  </fieldset>
+</form>
+
+<script>
+  // number handling and meter tag
+  var val = document.getElementById("val");
+  var mtr = document.getElementById("mtr");
+  var num = document.getElementById("num").value;
+  
+  val.innerHTML = num;
+  mtr.value = num/100;
+  
+  var run = function(numval) {
+    val.innerHTML = numval;
+    mtr.value = numval/100;
+  }
+
+  // email input handler:  
+  var email = document.getElementById("mail");
+  email.addEventListener("keyup", function (event) {
+    if (email.validity.typeMismatch) {
+      email.setCustomValidity("This requires an email address!");
+    } else {
+      email.setCustomValidity("");
+    }
+  });
+</script>
+
+</body>
+</html>
